@@ -1,7 +1,7 @@
 require("dotenv").config()
 
 // Welcome to Rigel II
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js'); // 🔥 TEK SATIRDA TOPLADIK
 const { joinVoiceChannel } = require('@discordjs/voice');
 
 const client = new Client({
@@ -9,33 +9,41 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildVoiceStates // ses kanalları için
+    GatewayIntentBits.GuildVoiceStates
   ]
 });
 
 // Bot hazır olduğunda
 client.once('ready', () => {
-  console.log('Bot aktif!');
-  
-  // 🔥 BURASI SENİN İSTEDİĞİN KISIM
- setInterval(() => {
-  const statuses = [
-    'Sunucuyu izliyor',
-    'Komutları izliyor',
-    `${client.guilds.cache.size} sunucuya bakıyor`
-  ];
+  console.log(`${client.user.tag} aktif!`);
 
-  const random = statuses[Math.floor(Math.random() * statuses.length)];
+  const setStatus = () => {
+    const statuses = [
+      'Sunucuyu izliyor',
+      'Komutları izliyor',
+      `${client.guilds.cache.size} sunucuya bakıyor`
+    ];
 
-  client.user.setPresence({
-    status: 'dnd',
-    activities: [{
-      name: random,
-      type: ActivityType.Watching
-    }]
-  });
-}, 10000);
+    const random = statuses[Math.floor(Math.random() * statuses.length)];
+
+    client.user.setPresence({
+      status: 'dnd',
+      activities: [{
+        name: random,
+        type: ActivityType.Watching
+      }]
+    });
+
+    console.log("Status güncellendi:", random); // 🔥 debug
+  };
+
+  // İlk çalıştır
+  setStatus();
+
+  // 10 saniyede bir değiştir
+  setInterval(setStatus, 10000);
 });
+
 // Metin komutları
 client.on('messageCreate', message => {
   if (message.content === '.ping') {
@@ -57,6 +65,5 @@ client.on('messageCreate', message => {
   }
 });
 
-// Token
 console.log("TOKEN:", process.env.TOKEN);
 client.login(process.env.TOKEN);
