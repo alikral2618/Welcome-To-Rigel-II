@@ -1,7 +1,6 @@
 require("dotenv").config()
 
-// Welcome to Rigel II
-const { Client, GatewayIntentBits, ActivityType } = require('discord.js'); // 🔥 TEK SATIRDA TOPLADIK
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 const { joinVoiceChannel } = require('@discordjs/voice');
 
 const client = new Client({
@@ -19,9 +18,11 @@ client.once('ready', () => {
 
   const setStatus = () => {
     const statuses = [
-      'Sunucuyu izliyor',
-      'Komutları izliyor',
-      `${client.guilds.cache.size} sunucuya bakıyor`
+      '👀 Sunucuyu izliyor',
+      '⚙️ Komutları izliyor',
+      `🌐 ${client.guilds.cache.size} sunucuya bakıyor`,
+      '🎥 YouTube: @rigel', // 👈 BURAYI KENDİ KANALINLA DEĞİŞTİR
+      '🚀 Aktif!'
     ];
 
     const random = statuses[Math.floor(Math.random() * statuses.length)];
@@ -34,17 +35,14 @@ client.once('ready', () => {
       }]
     });
 
-    console.log("Status güncellendi:", random); // 🔥 debug
+    console.log("Status:", random);
   };
 
-  // İlk çalıştır
   setStatus();
-
-  // 10 saniyede bir değiştir
   setInterval(setStatus, 10000);
 });
 
-// Metin komutları
+// Komutlar
 client.on('messageCreate', message => {
   if (message.content === '.ping') {
     message.reply('Pong!');
@@ -62,6 +60,11 @@ client.on('messageCreate', message => {
     });
 
     message.reply(`Ses kanalına katıldım: ${channel.name}`);
+  }
+
+  // 🔥 YouTube komutu (tıklanabilir link)
+  if (message.content === '.youtube') {
+    message.reply('📺 Kanalım: https://www.youtube.com/@NextAli%C4%A6/featured');
   }
 });
 
