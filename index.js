@@ -16,8 +16,26 @@ const client = new Client({
 // Bot hazır olduğunda
 client.once('ready', () => {
   console.log('Bot aktif!');
-});
+  
+  // 🔥 BURASI SENİN İSTEDİĞİN KISIM
+ setInterval(() => {
+  const statuses = [
+    'Sunucuyu izliyor',
+    'Komutları izliyor',
+    `${client.guilds.cache.size} sunucuya bakıyor`
+  ];
 
+  const random = statuses[Math.floor(Math.random() * statuses.length)];
+
+  client.user.setPresence({
+    status: 'dnd',
+    activities: [{
+      name: random,
+      type: ActivityType.Watching
+    }]
+  });
+}, 10000);
+});
 // Metin komutları
 client.on('messageCreate', message => {
   if (message.content === '.ping') {
