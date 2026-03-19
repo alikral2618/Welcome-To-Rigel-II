@@ -2,7 +2,7 @@ require("dotenv").config()
 
 const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 const { joinVoiceChannel } = require('@discordjs/voice');
-
+//Welcome To Rigel II
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -21,7 +21,7 @@ client.once('ready', () => {
       '👀 Sunucuyu izliyor',
       '⚙️ Komutları izliyor',
       `🌐 ${client.guilds.cache.size} sunucuya bakıyor`,
-      '🎥 YouTube: @rigel', // 👈 BURAYI KENDİ KANALINLA DEĞİŞTİR
+      '🎥 YouTube: @NextAli', // 👈 BURAYI KENDİ KANALINLA DEĞİŞTİR
       '🚀 Aktif!'
     ];
 
